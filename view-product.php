@@ -17,6 +17,10 @@ $products = $product->getAll();
 <body>
     <h1>Producten</h1>
 
+    <?php if (isset($_GET['deleted'])): ?>
+        <p>Product verwijderd.</p>
+    <?php endif; ?>
+
     <table>
         <tr>
             <th>Code</th>
@@ -33,7 +37,7 @@ $products = $product->getAll();
                 <td>&euro; <?= $product['prijsPerStuk'] ?></td>
                 <td>
                     <a href="product-edit.php?id=<?= (int) $product['id'] ?>">Aanpassen</a>
-                    <button>Verwijderen</button>
+                    <a href="product-delete.php?id=<?= (int) $product['id'] ?>">Verwijderen</a>
                 </td>
             </tr>
         <?php endforeach; ?>
