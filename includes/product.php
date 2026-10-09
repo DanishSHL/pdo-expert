@@ -38,4 +38,33 @@ class Product
             ->query('SELECT * FROM products')
             ->fetchAll();
     }
+
+    public function getById(int $id): ?array
+    {
+        $statement = $this->connection->prepare('SELECT * FROM products WHERE id = :id');
+        $statement->execute([':id' => $id]);
+
+        return $statement->fetch() ?: null;
+    }
+
+    public function update(
+        int $id,
+        string $code,
+        string $omschrijving,
+        string $photo,
+        string $prijsPerStuk
+    ): bool {
+        $statement = $this->connection->prepare(
+            'UPDATE products SET code = :code, omschrijving = :omschrijving,
+             photo = :photo, prijsPerStuk = :prijsPerStuk WHERE id = :id'
+        );
+
+        return $statement->execute([
+            ':id' => $id,
+            ':code' => $code,
+            ':omschrijving' => $omschrijving,
+            ':photo' => $photo,
+            ':prijsPerStuk' => $prijsPerStuk,
+        ]);
+    }
 }

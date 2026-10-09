@@ -32,7 +32,7 @@ $products = $product->getAll();
                 <td><?= htmlspecialchars($product['photo']) ?></td>
                 <td>&euro; <?= $product['prijsPerStuk'] ?></td>
                 <td>
-                    <button>Aanpassen</button>
+                    <a href="product-edit.php?id=<?= (int) $product['id'] ?>">Aanpassen</a>
                     <button>Verwijderen</button>
                 </td>
             </tr>
